@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.DS_Store
+ckpts/
+mnist_data/
+*.log
+*.pt
+README_zh_draft.md
+README_plain_zh_draft.md
+README_dense_zh_draft.md
+README_logic_zh_draft.md
