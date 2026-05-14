@@ -120,8 +120,13 @@ def plot_concept_cartoon(out_path: Path) -> None:
     ax.plot(x, y, color=GREEN, lw=3, solid_capstyle="round")
     ax.add_patch(Circle(theta, 0.23, facecolor=BLUE, edgecolor="white", lw=3, zorder=5))
 
+    gauge_t = 1.4
+    gauge_xy = (
+        theta[0] + 1.35 * gauge_t,
+        theta[1] + 0.38 * np.sin(1.5 * gauge_t),
+    )
     annotate(ax, "trained representative", theta, (1.25, 1.0), BLUE, ha="left")
-    annotate(ax, "known architectural gauge orbit", (5.0, 2.1), (6.4, 0.85), GREEN)
+    annotate(ax, "known architectural gauge orbit", gauge_xy, (6.4, 0.85), GREEN)
     annotate(ax, "possible wider equivalence sheet", (2.2, 3.65), (2.6, 4.55), ORANGE)
 
     ax.plot([7.6, 7.6], [0.6, 4.4], color=GRID, lw=1.4)
@@ -187,7 +192,8 @@ def plot_jacobian_spectrum(results_dir: Path, out_path: Path) -> None:
         ax.set_title(title)
         ax.set_xlabel("singular-value index")
         ax.set_ylabel("singular value of J")
-        ax.legend(loc="lower left", ncol=2)
+        legend_cols = 2 if shade_color != ORANGE and len(files) > 2 else 1
+        ax.legend(loc="lower left", ncol=legend_cols)
 
     fig.suptitle("Local tangent space from the Jacobian spectrum", y=1.02,
                  fontsize=13, fontweight="bold")
